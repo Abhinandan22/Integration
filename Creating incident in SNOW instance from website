@@ -1,0 +1,19 @@
+HTML file:-
+
+<html>
+<head>
+
+<script src="learnapi.js"/></script>
+
+</head>
+<body>
+
+<input type="button" value="Submit" onclick="learnApi()"/>
+
+</body>
+
+</html>
+
+
+Javascript :- learnapi.js file copy Javascript from API EXPLORER after Send is clicked.
+
