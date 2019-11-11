@@ -1,0 +1,44 @@
+Create an incident from POSTMAN :-
+
+1 > Create a new Scripted REST API
+2 > Create a Resource.User HTTP method as any operation(GET,POST).
+3 > Provide any parameter in the Relative Path
+4 > In the script mention return new getIncidentDetails().getdetails(request.pathParams.number);
+5 > Write the following script in the script includes :-
+
+var getIncidentDetails = Class.create();
+getIncidentDetails.prototype = {
+    initialize: function() {
+    },
+	
+	
+	getdetails: function(number){
+	try{
+			var inc = [];
+			var gr = new GlideRecord("incident");
+			gr.addQuery("number",number);
+			gr.query();
+		
+		
+		  if(gr.next())
+			  {
+				  inc.push({
+					  "Number":gr.number+ '',
+					  'State':gr.state.getDisplayValue()+'',
+					  'Short Description':gr.short_description+'',
+					  'Assignment Group':gr.assignment_group.getDisplayValue()
+				  });
+				  return inc;
+			  }
+	       }          catch(e)
+					 {
+						 gs.error("error",e);
+					 }
+		
+		}
+	}
+  
+  6 > Navigate to REST API Explorer and then create the incident.
+  7 > When using postman please provide the end point and headers on it and then create the incident
+
+   
