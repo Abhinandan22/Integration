@@ -1,0 +1,32 @@
+
+Write an after BR in the instance where the incident is to be created in the first place. Mention the details of other 
+instance in this BR. After creation of the incident it flows to the other instance.
+
+
+After Business Rules :- 
+
+
+
+(function executeRule(current, previous /*null when async*/) {
+
+	// Add your code here
+	
+	
+	var title = current.short_description;
+	var caller = current.caller_id;
+	
+	var request = new sn_ws.RESTMessageV2();
+request.setEndpoint('https://dev92654.service-now.com/api/now/table/incident');
+request.setHttpMethod('POST');
+
+//Eg. UserName="admin", Password="admin" for this code sample.
+	var user = 'REST TEST';
+var password = '1234';
+
+request.setBasicAuth(user,password);
+request.setRequestHeader("Accept","application/json");
+request.setRequestHeader('Content-Type','application/json');request.setRequestBody("{\"short_description\":\"" +title+ "\""+ ",\"caller_id\":\"" +caller+ "\"}");
+var response = request.execute();
+gs.log(response.getBody());
+
+})(current, previous);
